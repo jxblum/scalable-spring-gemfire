@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springone2gx.2015</groupId>
+    <artifactId>scalable-spring-gemfire-applications</artifactId>
+    <version>1.0.0.RELEASE</version>
+  </parent>
+  <artifactId>spring-gemfire-bootstrap</artifactId>
+  <packaging>jar</packaging>
+
+  <name>Spring GemFire Bootstrap</name>
+  <description>Bootstrap module for the Scalable Spring GemFire Applications project containing examples of how to bootstrap a Spring GemFire Application.</description>
+  <url>https://2015.event.springone2gx.com/schedule/sessions/building_highly_scalable_spring_applications_with_in_memory_distributed_data_grids.html</url>
+
+  <organization>
+    <name>Pivotal Software, Inc.</name>
+    <url>http://www.pivotal.io</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>jblum</id>
+      <name>John Blum</name>
+      <email>jblum at pivotal dot io</email>
+      <organization>Pivotal Software, Inc.</organization>
+      <organizationUrl>http://www.spring.io</organizationUrl>
+      <roles>
+        <role>Spring Data Team</role>
+        <role>Spring Data GemFire Project Lead (committer)</role>
+        <role>Apache Geode Committer</role>
+        <role>GemFire Engineer/Technical Lead</role>
+        <role>SpringOne2GX-2015 Presenter</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springone2gx.2015</groupId>
+      <artifactId>spring-gemfire-configuration</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.shell</groupId>
+      <artifactId>spring-shell</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>

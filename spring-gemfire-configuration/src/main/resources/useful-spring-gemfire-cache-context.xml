@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:gfe="http://www.springframework.org/schema/gemfire"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/gemfire http://www.springframework.org/schema/gemfire/spring-gemfire.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+">
+
+  <util:properties id="gemfireApplicationSettings">
+    <prop key="app.gemfire.cache.critical-heap-percentage">0.95</prop>
+    <prop key="app.gemfire.cache.eviction-heap-percentage">0.85</prop>
+    <prop key="app.gemfire.cache.server.bind-address">localhost</prop>
+    <prop key="app.gemfire.cache.server.hostname-for-clients">localhost</prop>
+    <prop key="app.gemfire.cache.server.port">12480</prop>
+    <prop key="app.gemfire.cache.server.max-connections">5</prop>
+    <prop key="app.gemfire.region.initial-capacity">101</prop>
+    <prop key="app.gemfire.region.load-factor">0.75</prop>
+  </util:properties>
+
+  <context:property-placeholder properties-ref="gemfireApplicationSettings"/>
+
+  <util:properties id="gemfireProperties">
+    <prop key="name">UsefulSpringGemFirePeerCacheMemberApplication</prop>
+    <prop key="mcast-port">0</prop>
+    <prop key="log-level">config</prop>
+    <prop key="locators">localhost[11235]</prop>
+    <prop key="jmx-manager">true</prop>
+    <prop key="jmx-manager-port">1199</prop>
+    <prop key="jmx-manager-start">true</prop>
+    <prop key="start-locator">localhost[11235]</prop>
+  </util:properties>
+
+  <gfe:cache properties-ref="gemfireProperties" critical-heap-percentage="${app.gemfire.cache.critical-heap-percentage}"
+             eviction-heap-percentage="${app.gemfire.cache.eviction-heap-percentage}"/>
+
+  <gfe:cache-server auto-startup="true" bind-address="${app.gemfire.cache.server.bind-address}" port="${app.gemfire.cache.server.port}"
+                    host-name-for-clients="${app.gemfire.cache.server.hostname-for-clients}" max-connections="${app.gemfire.cache.server.max-connections}"/>
+
+  <gfe:partitioned-region id="Example" persistent="false" initial-capacity="${app.gemfire.region.initial-capacity}"
+                          load-factor="${app.gemfire.region.load-factor}">
+    <gfe:cache-listener>
+      <bean class="sample.gemfire.cache.support.LoggingCacheListener"/>
+    </gfe:cache-listener>
+    <gfe:cache-loader>
+      <bean class="sample.gemfire.cache.support.TimestampCacheLoader"/>
+    </gfe:cache-loader>
+  </gfe:partitioned-region>
+
+</beans>
