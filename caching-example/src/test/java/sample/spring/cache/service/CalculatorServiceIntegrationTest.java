@@ -39,30 +39,41 @@ public class CalculatorServiceIntegrationTest {
     return calculatorService;
   }
 
-  protected BigInteger log(BigInteger result, long number) {
-    System.err.printf("%1$d! == %2$s%n", number, result);
+  protected BigInteger log(BigInteger result, long number, boolean cacheHit) {
+    System.err.printf("%1$d! == %2$s; Cache %3$s%n", number, result, (cacheHit ? "Hit" : "Miss"));
     return result;
   }
 
   @Test
   public void factorialCacheHitsAndMisses() {
     BigInteger four = new BigInteger("4");
-    BigInteger twentyFour = log(calculatorService().factorial(four), 4);
+    BigInteger twentyFour = calculatorService().factorial(four);
+
+    boolean cacheHit = calculatorService().isCacheHit();
+
+    log(twentyFour, 4, cacheHit);
 
     assertThat(twentyFour, is(notNullValue()));
     assertThat(twentyFour.intValue(), is(equalTo(24)));
-    assertThat(calculatorService().isCacheMiss(), is(true));
+    assertThat(cacheHit, is(false));
 
-    BigInteger twentyFourAgain = calculatorService().factorial(four);
+    twentyFour = calculatorService().factorial(four);
+    cacheHit = calculatorService().isCacheHit();
 
-    assertThat(twentyFourAgain, is(equalTo(twentyFour)));
-    assertThat(calculatorService().isCacheHit(), is(true));
+    log(twentyFour, 4, cacheHit);
 
-    BigInteger oneHundredTwenty = log(calculatorService().factorial(new BigInteger("5")), 5);
+    assertThat(twentyFour, is(notNullValue()));
+    assertThat(twentyFour.intValue(), is(equalTo(24)));
+    assertThat(cacheHit, is(true));
+
+    BigInteger oneHundredTwenty = calculatorService().factorial(new BigInteger("5"));
+
+    cacheHit = calculatorService().isCacheHit();
+    log(oneHundredTwenty, 5, cacheHit);
 
     assertThat(oneHundredTwenty, is(notNullValue()));
     assertThat(oneHundredTwenty.intValue(), is(equalTo(120)));
-    assertThat(calculatorService().isCacheMiss(), is(true));
+    assertThat(cacheHit, is(false));
   }
 
 }
