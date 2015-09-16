@@ -29,7 +29,7 @@ import sample.core.lang.ObjectUtils;
  */
 @Region("Quotes")
 @SuppressWarnings("unused")
-@TimeToLiveExpiration(timeout = "${app.quote.expiration.ttl.timeout}", action = "${app.quote.expiration.ttl.action}")
+//@TimeToLiveExpiration(timeout = "${app.quote.expiration.ttl.timeout}", action = "${app.quote.expiration.ttl.action}")
 public class Quote implements Serializable {
 
   private Author author;

@@ -34,6 +34,7 @@ import sample.startupquotes.service.StartupQuoteService;
 @SuppressWarnings("unused")
 public class StartupQuotesWebApplication {
 
+  protected static final String CACHE_HIT_ATTRIBUTE_NAME = "cacheHit";
   protected static final String CACHE_MISS_ATTRIBUTE_NAME = "cacheMiss";
   protected static final String QUOTE_VIEW_NAME = "quote";
   protected static final String PING_RESPONSE = "Pong!";
@@ -57,11 +58,6 @@ public class StartupQuotesWebApplication {
     return PING_RESPONSE;
   }
 
-  @RequestMapping("/test")
-  public String test() {
-    return TEST_VIEW_NAME;
-  }
-
   @RequestMapping("/random")
   public String randomQuote(ModelMap modelMap) {
     modelMap.addAttribute(quoteService().randomQuote());
@@ -72,6 +68,7 @@ public class StartupQuotesWebApplication {
   @RequestMapping("/author/{author}/random")
   public String randomQuoteByAuthor(@PathVariable("author") String author, ModelMap modelMap) {
     modelMap.addAttribute(quoteService().randomQuote(author));
+    modelMap.addAttribute(CACHE_HIT_ATTRIBUTE_NAME, quoteService().isCacheHit());
     modelMap.addAttribute(CACHE_MISS_ATTRIBUTE_NAME, quoteService().isCacheMiss());
 
     return QUOTE_VIEW_NAME;

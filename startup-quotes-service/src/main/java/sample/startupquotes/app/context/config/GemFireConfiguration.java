@@ -34,12 +34,14 @@ public class GemFireConfiguration {
 
     gemfireProperties.setProperty("name", "StartupQuotesGemFireService");
     gemfireProperties.setProperty("mcast-port", "0");
-    gemfireProperties.setProperty("log-level", "warning");
-//    gemfireProperties.setProperty("locators", "localhost[11235]");
-//    gemfireProperties.setProperty("jmx-manager", "true");
-//    gemfireProperties.setProperty("jmx-manager-port", "1199");
-//    gemfireProperties.setProperty("jmx-manager-start", "true");
-//    gemfireProperties.setProperty("start-locator", "localhost[11235]");
+    gemfireProperties.setProperty("log-level", "config");
+/*
+    gemfireProperties.setProperty("locators", "localhost[11235]");
+    gemfireProperties.setProperty("jmx-manager", "true");
+    gemfireProperties.setProperty("jmx-manager-port", "1199");
+    gemfireProperties.setProperty("jmx-manager-start", "true");
+    gemfireProperties.setProperty("start-locator", "localhost[11235]");
+*/
 
     return gemfireProperties;
   }

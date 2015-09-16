@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <h1>
+      <blockquote>
+        "<span th:text="${quote.content}"/>"
+      </blockquote>
+    </h1>
+    <center><h3><i><span th:text="' --' + ${quote.author.name} + ' (@' + ${quote.author.twitterHandle} + ')'"/></i></h3></center>
+    <br/>
+    Was cache hit? <b><span th:text="${cacheHit}? 'Yes' : 'No'"/></b>
+  </body>
+</html>

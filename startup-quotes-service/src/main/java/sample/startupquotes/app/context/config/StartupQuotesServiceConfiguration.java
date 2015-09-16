@@ -65,6 +65,17 @@ public class StartupQuotesServiceConfiguration {
     return cacheManager;
   }
 
+/*
+  @Bean
+  public InternalResourceViewResolver viewResolver() {
+    InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+    viewResolver.setViewClass(JstlView.class);
+    viewResolver.setPrefix("/WEB-INF/jsp/");
+    viewResolver.setSuffix(".jsp");
+    return viewResolver;
+  }
+*/
+
   @Bean
   public StartupQuoteService startupQuoteService() {
     return new StartupQuoteService(startupQuoteDao());
